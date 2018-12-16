@@ -5,6 +5,7 @@ app=Flask(__name__)
 
 class Config():
     DEBUG = True
+    # 设置mysql
     SQLALCHEMY_DATABASE_URI ='mysql:root:mysql@127.0.0.1:3306/wang_sql'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -12,6 +13,7 @@ class Config():
 
     REDIS_HOSt = '127.0.0.1'
     REDIS_PORT =6379
+    #设置 redis
 sr = StrictRedis(host=Config.REDIS_HOSt,port=Config.REDIS_PORT)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
