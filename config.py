@@ -16,3 +16,16 @@ class Config():
     SESSION_REDIS = StrictRedis(host=REDIS_HOSt,port=REDIS_PORT,db = 1)
     SESSION_USE_SIGNER =True
     PERMANENT_SESSION_LIFETIME = 3600
+
+# 线上环境
+class On_line(Config):
+    DEBUG = False
+
+# 线下环境
+class Off_line(Config):
+    DEBUG = True
+
+config = {
+    'on-line':On_line,
+    'off-line':Off_line
+}
