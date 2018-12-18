@@ -57,3 +57,131 @@ INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:00:58] "GET /static/news/imag
 INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:00:58] "GET /static/news/images/pic_code.png HTTP/1.1" 200 -
 INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:00:59] "GET /static/news/images/clock.png HTTP/1.1" 200 -
 INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:00:59] "GET /static/news/images/hit_icon.png HTTP/1.1" 200 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 299-808-284
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:41:41] "GET /static/news/html/index.html HTTP/1.1" 404 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 299-808-284
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:42:33] "GET /static/news/html/index.html HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:42:34] "GET /static/news/html/index.html HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:45:43] "GET /static/news/html/index.html HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:45:47] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:45:47] "GET /css/reset.css HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:45:47] "GET /css/main.css HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:45:47] "GET /js/jquery-1.12.4.min.js HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:45:47] "GET /js/main.js HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:45:47] "GET /js/index.js HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:45:47] "GET /images/logo.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:45:47] "GET /images/person01.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:45:47] "GET /images/news_pic.jpg HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:45:47] "GET /images/person.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:45:47] "GET /images/pic_code.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:12] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:12] "GET /css/reset.css HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:12] "GET /css/main.css HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:12] "GET /js/jquery-1.12.4.min.js HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:12] "GET /js/main.js HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:13] "GET /js/index.js HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:13] "GET /images/logo.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:13] "GET /images/person01.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:13] "GET /images/news_pic.jpg HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:13] "GET /images/person.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:13] "GET /images/pic_code.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:17] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:17] "GET /css/reset.css HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:17] "GET /css/main.css HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:17] "GET /js/jquery-1.12.4.min.js HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:17] "GET /js/main.js HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:17] "GET /js/index.js HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:17] "GET /images/logo.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:17] "GET /images/person01.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:17] "GET /images/news_pic.jpg HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:17] "GET /images/person.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:46:17] "GET /images/pic_code.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:47:07] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:47:07] "GET /css/reset.css HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:47:07] "GET /css/main.css HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:47:07] "GET /js/jquery-1.12.4.min.js HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:47:07] "GET /js/main.js HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:47:07] "GET /js/index.js HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:47:07] "GET /images/logo.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:47:07] "GET /images/person01.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:47:07] "GET /images/news_pic.jpg HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:47:07] "GET /images/person.png HTTP/1.1" 404 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:47:07] "GET /images/pic_code.png HTTP/1.1" 404 -
+INFO _internal.py:88  * Detected change in '/home/python/Document/新闻网/info_34/info/modules/index/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 299-808-284
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:54:38] "GET / HTTP/1.1" 500 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:54:38] "GET /?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:54:38] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:54:38] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:54:39] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:54:39] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO _internal.py:88  * Detected change in '/home/python/Document/新闻网/info_34/info/modules/index/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 299-808-284
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:55:07] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:55:07] "GET /static/news/css/reset.css HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:55:07] "GET /static/news/css/main.css HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:55:07] "GET /static/news/js/jquery-1.12.4.min.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:55:07] "GET /static/news/js/index.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:55:07] "GET /static/news/js/main.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:55:07] "GET /static/news/images/logo.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:55:07] "GET /static/news/images/person01.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:55:08] "GET /static/news/images/news_pic.jpg HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:55:08] "GET /static/news/images/person.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:55:08] "GET /static/news/images/pic_code.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:55:08] "GET /static/news/images/clock.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:55:08] "GET /static/news/images/hit_icon.png HTTP/1.1" 304 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 299-808-284
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:56:50] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:56:50] "GET /static/news/css/reset.css HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:56:50] "GET /static/news/css/main.css HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:56:50] "GET /static/news/js/jquery-1.12.4.min.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:56:50] "GET /static/news/js/main.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:56:50] "GET /static/news/js/index.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:56:50] "GET /static/news/images/logo.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:56:50] "GET /static/news/images/news_pic.jpg HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:56:50] "GET /static/news/images/person.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:56:50] "GET /static/news/images/person01.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 16:56:50] "GET /static/news/images/pic_code.png HTTP/1.1" 304 -
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 299-808-284
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:05:49] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:05:49] "GET /static/news/css/reset.css HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:05:49] "GET /static/news/css/main.css HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:05:49] "GET /static/news/js/jquery-1.12.4.min.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:05:49] "GET /static/news/js/main.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:05:49] "GET /static/news/js/index.js HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:05:49] "GET /static/news/images/logo.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:05:49] "GET /static/news/images/news_pic.jpg HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:05:50] "GET /static/news/images/person.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:05:50] "GET /static/news/images/person01.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:05:50] "GET /static/news/images/pic_code.png HTTP/1.1" 304 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:32] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:32] "GET /static/news/css/reset.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:32] "GET /static/news/css/main.css HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:32] "GET /static/news/js/jquery-1.12.4.min.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:32] "GET /static/news/js/main.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:32] "GET /static/news/js/index.js HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:32] "GET /static/news/images/logo.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:32] "GET /static/news/images/person01.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:32] "GET /static/news/images/news_pic.jpg HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:32] "GET /static/news/images/person.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:32] "GET /static/news/images/pic_code.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:32] "GET /static/news/images/clock.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:32] "GET /static/news/images/hit_icon.png HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:40] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [18/Dec/2018 17:06:41] "GET /favicon.ico HTTP/1.1" 200 -
