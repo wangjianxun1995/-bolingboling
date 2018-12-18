@@ -153,8 +153,8 @@ var imageCodeId = ""
 //  生成一个图片验证码的编号，并设置页面中图片验证码img标签的src属性
 // jiushi zhe li
 function generateImageCode() {
-    var code_id = generateUUID()
-    var imageUrl = '/passport/image_code?code_id='+code_id
+    var imageCodeId = generateUUID()
+    var imageUrl = '/passport/image_code?code_id='+imageCodeId
 
     $('.get_pic_code').attr('src',imageUrl)
 
@@ -179,8 +179,54 @@ function sendSMSCode() {
         return;
     }
 
-    // TODO 发送短信验证码
+    //  发送短信验证码
+    var params={
+        'mobile':mobile,
+        'image_code':imageCode,
+        'image_code_id':imageCodeId
+    }
+    //发送ajax 请求
+    //发送ajax post请求 而且请求 json
+    $.ajax({
+        url:'/passport/sms_code',
+        type:'post',
+        contentType:'application/json', //告知服务器我们传递是json
+        dataType:'json',
+        data:JSON.stringify(params),    // 将字典转换为字符串
+        success:function (resp) {
+            if (resp.errno == "0") {
+                // 倒计时60秒，60秒后允许用户再次点击发送短信验证码的按钮
+                var num = 60;
+                // 设置一个计时器
+                var t = setInterval(function () {
+                    if (num == 1) {
+                        // 如果计时器到最后, 清除计时器对象
+                        clearInterval(t);
+                        // 将点击获取验证码的按钮展示的文本回复成原始文本
+                        $(".get_code").html("获取验证码");
+                        // 将点击按钮的onclick事件函数恢复回去
+                        $(".get_code").attr("onclick", "sendSMSCode();");
+                    } else {
+                        num -= 1;
+                        // 展示倒计时信息
+                        $(".get_code").html(num + "秒");
+                    }
+                }, 1000)
+            } else {
+                // 表示后端出现了错误，可以将错误信息展示到前端页面中
+                $("#register-sms-code-err").html(resp.errmsg);
+                $("#register-sms-code-err").show();
+                // 将点击按钮的onclick事件函数恢复回去
+                $(".get_code").attr("onclick", "sendSMSCode();");
+                // 如果错误码是4004，代表验证码错误，重新生成验证码
+                if (resp.errno == "4004") {
+                    generateImageCode()
+                }
+            }
+        }
+    })
 }
+
 
 // 调用该函数模拟点击左侧按钮
 function fnChangeMenu(n) {

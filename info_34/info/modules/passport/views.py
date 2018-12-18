@@ -22,7 +22,8 @@ def get_image_code():
     except Exception as e:
         current_app.logger.error(e)
         return jsonify(errno = RET.DATAERR,errmsg='redis保存失败')
-    # current_app.logger.info(text)
+
+    current_app.logger.info(text)
 
 
     response= make_response(image)
@@ -32,7 +33,7 @@ def get_image_code():
     return  response
     # return image
 
-@passport_blue.route('/sms_code')
+@passport_blue.route('/sms_code',methods=['POST'])
 def send_sms_code():
     data = request.json
     mobile=data.get('mobile')
@@ -40,17 +41,21 @@ def send_sms_code():
     image_code_id = data.get('image_code_id')
     if not all([mobile,image_code,image_code_id]):
         return jsonify(errno = RET.PARAMERR,errmsg ='参数不正确')
-    if re.match(r'1[3-9][0-9]{9}',mobile):
+    if not re.match(r'1[3-9][0-9]{9}',mobile):
         return jsonify(errno = RET.PARAMERR,errmsg ='手机格式不正确')
     count =User.query.filter(User.mobile == mobile).count()
     if count > 0:
         return jsonify(errno=RET.DATAEXIST,errmsg='手机号已经注册')
     try:
         redis_code =redis_store.get('img_'+image_code_id)
+        if redis_code:
+            redis_code =redis_code.decode()
     except Exception as e:
         current_app.logger.error(e)
         return jsonify(errno=RET.DATAERR,errmsg = 'redis数据有问题')
-    if image_code != redis_code:
+    if not redis_code:
+        return jsonify(errno=RET.DATAERR,errmsg = '图片验证码以及过期')
+    if image_code.lower() != redis_code.lower():
         return jsonify(errno=RET.DATAERR,errmsg = '验证码不一致')
     from random import randint
     sms_code = '%06d'%randint(0,999999)

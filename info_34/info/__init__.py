@@ -44,7 +44,7 @@ def create_app(config_name='development'):
     redis_store=StrictRedis(host=config[config_name].REDIS_HOST,port=config[config_name].REDIS_PORT)
 
     # CSRF的设置 -- 关于原理我们明天将
-    CSRFProtect(app)
+    # CSRFProtect(app)
 
     """
     session是保存在 服务器端
