@@ -1,9 +1,8 @@
-import logging
-
 from flask import current_app
 from flask_migrate import Migrate,MigrateCommand
 from flask_script import Manager
-from info_34.info import create_app,db
+from info import create_app,db
+from info import models
 
 # StrictRedis ,Redis是一样的
 """

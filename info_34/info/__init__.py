@@ -6,8 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from flask_session import Session
 from redis import StrictRedis
-from ..config import ProductionConfig,DevelopmentConfig
-from ..config import config
+from config import config
 
 """
 http://140.143.37.139:4999/
@@ -67,7 +66,7 @@ def create_app(config_name='development'):
 
     Session(app)
 
-    from info_34.info.modules.index import index_blue
+    from info.modules.index import index_blue
 
     app.register_blueprint(index_blue)
 
