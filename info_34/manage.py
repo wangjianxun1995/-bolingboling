@@ -3,6 +3,7 @@ from flask_migrate import Migrate,MigrateCommand
 from flask_script import Manager
 from info import create_app,db
 from info import models
+# from info import views
 
 # StrictRedis ,Redis是一样的
 """

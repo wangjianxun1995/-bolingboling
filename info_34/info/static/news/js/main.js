@@ -151,10 +151,12 @@ $(function(){
 var imageCodeId = ""
 
 //  生成一个图片验证码的编号，并设置页面中图片验证码img标签的src属性
+// jiushi zhe li
 function generateImageCode() {
     var code_id = generateUUID()
-    var imangeUrl = '/passport/image_code_id?='+code_id
-    $('.get_pic_code').attr('src',imangeUrl)
+    var imageUrl = '/passport/image_code?code_id='+code_id
+
+    $('.get_pic_code').attr('src',imageUrl)
 
 }
 
