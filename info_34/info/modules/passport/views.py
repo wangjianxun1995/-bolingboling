@@ -2,8 +2,9 @@ import re
 from flask import current_app, jsonify
 from flask import make_response
 from flask import request
+from flask import session
 
-from info import constants
+from info import constants, db
 from info import redis_store
 from info.lib.yuntongxun.sms import CCP
 from info.models import User
@@ -50,6 +51,7 @@ def send_sms_code():
         redis_code =redis_store.get('img_'+image_code_id)
         if redis_code:
             redis_code =redis_code.decode()
+            redis_store.delete('img_'+image_code_id)
     except Exception as e:
         current_app.logger.error(e)
         return jsonify(errno=RET.DATAERR,errmsg = 'redis数据有问题')
@@ -68,3 +70,45 @@ def send_sms_code():
         current_app.logger.error(e)
         return  jsonify(errno=RET.DATAERR,errmsg = '发送失败')
     return  jsonify(errno=RET.OK,errmsg = 'OK')
+
+@passport_blue.route('/register',methods=['POST'])
+def register():
+    mobile = request.json.get('mobile')
+    sms_code = request.json.get('sms_code')
+    passwordd= request.json.get('password')
+    if not all([mobile,sms_code,passwordd]):
+        return jsonify (errno = RET.DATAERR,errmsg='参数不全')
+
+    try:
+        redis_sms_code = redis_store.get('sms_'+mobile)
+        if redis_sms_code:
+            redis_sms_code = redis_sms_code.decode()
+            redis_store.delete('sms_'+mobile)
+
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DATAERR,errmsg='数据有误')
+
+    if not redis_sms_code:
+        return jsonify(errno = RET.NODATA,errmsg ='短信验证码过期 ')
+
+    if redis_sms_code !=sms_code:
+        return jsonify(errno = RET.DATAERR,errmsg='验证码不一致')
+
+    user = User()
+    user.mobile= mobile
+    user.password = passwordd
+    user.nick_name = mobile
+
+    try:
+        db.session.add(user)
+        db.session.commit()
+    except Exception as e:
+        current_app.app.logger.error(e)
+        db.session.rollback()
+
+    session['user_id']= user.id
+    session['mobile'] = mobile
+    session['nick_name']= mobile
+    return jsonify(errno =RET.OK,errmsg='注册成功')
+

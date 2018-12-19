@@ -144,7 +144,23 @@ $(function(){
         }
 
         // 发起注册请求
-
+        var params={
+            'mobile':mobile,
+            'sms_code':smscode,
+            'password':password
+        }
+        $.ajax({
+            url:'/password/register',
+            type:'post',
+            contentType:'application/json',
+            dataType:'json',
+            data:JSON.stringify(params),
+            success:function (resp) {
+                if(resp.errno=='0'){
+                    alert('注册成功ok')
+                }
+            }
+        })
     })
 })
 
@@ -153,7 +169,7 @@ var imageCodeId = ""
 //  生成一个图片验证码的编号，并设置页面中图片验证码img标签的src属性
 // jiushi zhe li
 function generateImageCode() {
-    var imageCodeId = generateUUID()
+    imageCodeId = generateUUID()
     var imageUrl = '/passport/image_code?code_id='+imageCodeId
 
     $('.get_pic_code').attr('src',imageUrl)
