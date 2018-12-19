@@ -71,6 +71,7 @@ def send_sms_code():
         return  jsonify(errno=RET.DATAERR,errmsg = '发送失败')
     return  jsonify(errno=RET.OK,errmsg = 'OK')
 
+# 注册后端
 @passport_blue.route('/register',methods=['POST'])
 def register():
     json_data = request.json
@@ -114,3 +115,28 @@ def register():
 
     return jsonify(errno =RET.OK,errmsg='注册成功')
 
+@passport_blue.route('/login',methods=['POSt'])
+def login():
+    mobile = request.json.get('mobile')
+    password = request.json.get('password')
+    if not all([mobile,password]):
+        return jsonify(errno=RET.PARAMERR,errmsg='参数不全 ')
+    try:
+        user =User.query.filter(User.mobile==mobile).first()
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR,errmsg='数据库错误 ')
+    if not user:
+        return jsonify(errno=RET.NODATA,errmsg='暂未注册')
+    if not user.check_passowrd(password):
+        return jsonify(errno =RET.DATAERR,errmsg='用户名或者密码错误 ')
+    session['user_id']=user.id
+    session['nick_name']=user.nick_name
+    session['mobile'] =user.mobile
+
+    try:
+        db.session.commit()
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.roolback()
+    return jsonify(errno=RET.OK,errmsg='ok')

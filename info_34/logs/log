@@ -1202,3 +1202,10 @@ INFO _internal.py:88 127.0.0.1 - - [19/Dec/2018 16:56:54] "GET /static/news/imag
 INFO _internal.py:88 127.0.0.1 - - [19/Dec/2018 16:56:54] "GET /static/news/images/person.png HTTP/1.1" 304 -
 INFO _internal.py:88 127.0.0.1 - - [19/Dec/2018 16:56:54] "GET /static/news/images/person01.png HTTP/1.1" 304 -
 INFO _internal.py:88 127.0.0.1 - - [19/Dec/2018 16:56:54] "GET /static/news/images/pic_code.png HTTP/1.1" 304 -
+INFO views.py:27 Q7MM
+INFO _internal.py:88 127.0.0.1 - - [19/Dec/2018 17:03:18] "GET /passport/image_code?code_id=4263d109-513a-4394-ab93-c67f65875c63 HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [19/Dec/2018 17:03:41] "POST /passport/sms_code HTTP/1.1" 200 -
+INFO _internal.py:88  * Detected change in '/home/python/Document/新闻网/info_34/info/modules/passport/views.py', reloading
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 299-808-284
