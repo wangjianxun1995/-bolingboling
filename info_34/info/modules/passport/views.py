@@ -73,11 +73,12 @@ def send_sms_code():
 
 @passport_blue.route('/register',methods=['POST'])
 def register():
-    mobile = request.json.get('mobile')
-    sms_code = request.json.get('sms_code')
-    passwordd= request.json.get('password')
-    if not all([mobile,sms_code,passwordd]):
-        return jsonify (errno = RET.DATAERR,errmsg='参数不全')
+    json_data = request.json
+    mobile = json_data.get('mobile')
+    sms_code = json_data.get('sms_code')
+    password= json_data.get('password')
+    if not all([mobile,sms_code,password]):
+        return jsonify (errno = RET.PARAMERR,errmsg='参数不全')
 
     try:
         redis_sms_code = redis_store.get('sms_'+mobile)
@@ -97,7 +98,7 @@ def register():
 
     user = User()
     user.mobile= mobile
-    user.password = passwordd
+    user.password = password
     user.nick_name = mobile
 
     try:
@@ -109,6 +110,7 @@ def register():
 
     session['user_id']= user.id
     session['mobile'] = mobile
-    session['nick_name']= mobile
+    session['nick_name']= user.nick_name
+
     return jsonify(errno =RET.OK,errmsg='注册成功')
 

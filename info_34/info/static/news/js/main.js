@@ -150,14 +150,18 @@ $(function(){
             'password':password
         }
         $.ajax({
-            url:'/password/register',
+            url:'/passport/register',
             type:'post',
             contentType:'application/json',
             dataType:'json',
             data:JSON.stringify(params),
-            success:function (resp) {
-                if(resp.errno=='0'){
-                    alert('注册成功ok')
+            success:function (response) {
+                if(response.errno=='0'){
+                    // alert('注册成功ok')
+                    location.reload()
+                }else {
+                        $("#register-password-err").html(resp.errmsg)
+                        $("#register-password-err").show()
                 }
             }
         })
