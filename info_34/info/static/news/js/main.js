@@ -110,6 +110,26 @@ $(function(){
         }
 
         // 发起登录请求
+        var params={
+            'mobile':mobile,
+            'password':password
+        }
+        $.ajax({
+            url:'/passport/login',
+            type:'post',
+            contentType:'application/json',
+            dataType:'json',
+            data:JSON.stringify(params),
+            success:function (resp) {
+                if(resp.errno=='0'){
+                location.reload();
+                }else {
+                $("#login-password-err").html(resp.errmsg)
+                $("#login-password-err").show()
+            }
+            }
+
+        })
     })
 
 

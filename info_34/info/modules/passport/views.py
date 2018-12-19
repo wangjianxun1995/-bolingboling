@@ -1,4 +1,6 @@
 import re
+
+from datetime import datetime
 from flask import current_app, jsonify
 from flask import make_response
 from flask import request
@@ -117,22 +119,33 @@ def register():
 
 @passport_blue.route('/login',methods=['POSt'])
 def login():
-    mobile = request.json.get('mobile')
-    password = request.json.get('password')
+   #1.后端要接收的数据
+    json_data=request.json
+    mobile = json_data.get('mobile')
+    password = json_data.get('password')
+   #2.判断数据是否齐全
     if not all([mobile,password]):
         return jsonify(errno=RET.PARAMERR,errmsg='参数不全 ')
+    # 根据用户名查询用户记录
     try:
         user =User.query.filter(User.mobile==mobile).first()
     except Exception as e:
         current_app.logger.error(e)
         return jsonify(errno=RET.DBERR,errmsg='数据库错误 ')
+#进行查询的时候user 有可能没有值
     if not user:
-        return jsonify(errno=RET.NODATA,errmsg='暂未注册')
+        return jsonify(errno=RET.USERERR,errmsg='暂未注册')
+#如果有记录说明已经注册过，判断密码是否正确
+   # check_passowrd 密码正确返回true
+   #check_passowrd 密码不正确返回false
     if not user.check_passowrd(password):
-        return jsonify(errno =RET.DATAERR,errmsg='用户名或者密码错误 ')
+        return jsonify(errno =RET.PWDERR,errmsg='用户名或者密码错误 ')
+#正确，记录登录信息
     session['user_id']=user.id
     session['nick_name']=user.nick_name
     session['mobile'] =user.mobile
+
+    user.last_login = datetime.now()
 
     try:
         db.session.commit()
