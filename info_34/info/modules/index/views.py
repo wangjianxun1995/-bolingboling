@@ -2,7 +2,7 @@ from flask import current_app
 from flask import render_template
 from flask import session
 
-from info.models import User
+from info.models import User, News
 from info.modules.index import index_blue
 
 @index_blue.route('/')
@@ -17,8 +17,24 @@ def index():
             user = User.query.get(user_id)
         except Exception as e:
             current_app.logger.error(e)
+        #######################################点击率排行##########################################
+
+    # 根据点击率 进行指定数量降序 排列
+    try:
+        click_list = News.query.order_by(News.clicks.desc()).limit(10)
+    except Exception as e:
+        current_app.logger.error(e)
+
+    clicks_news= []
+    for item in click_list:
+        clicks_news.append(item.to_dict())
+
+
+
+
     data={
-        'user_info':user.to_dict() if user else None
+        'user_info':user.to_dict() if user else None,
+        'clisks_news':clicks_news
     }
 
     return render_template('news/index.html',data=data)
