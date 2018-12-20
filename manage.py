@@ -4,6 +4,7 @@ from flask_script import Manager
 from info import create_app,db
 from info import models
 # from info import views
+from info.utlis.common import do_index_kind
 
 # StrictRedis ,Redis是一样的
 """
@@ -12,7 +13,7 @@ manage.py 其实主要是让我们的工程 运行起来
 info 是我们进行业务逻辑处理的文件夹
 """
 app = create_app()
-
+app.add_template_filter(do_index_kind, "index_kind")
 #使用 Manager管理类来管理 app
 manager=Manager(app)
 
@@ -21,7 +22,7 @@ Migrate(app=app,db=db)
 manager.add_command('db',MigrateCommand)
 
 
-###
+
 if __name__ == '__main__':
     # app.run()
     manager.run()
