@@ -311,8 +311,11 @@ function logout() {
             "X-CSRFToken": getCookie("csrf_token")
         },
         success: function (resp) {
-            // 刷新当前界面
+            if (resp.errno='0'){
+              // 刷新当前界面
             location.reload()
+            }
+
         }
     })
 }

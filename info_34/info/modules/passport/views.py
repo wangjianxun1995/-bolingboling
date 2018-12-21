@@ -156,9 +156,9 @@ def login():
 
 @passport_blue.route('/logout',methods=['POST'])
 def logout():
-    session.pop('user_id',None)
-    session.pop('nick_name',None)
-    session.pop('mobile',None)
+    session.pop('user_id')
+    session.pop('nick_name')
+    session.pop('mobile')
 
     return   jsonify(errno=RET.OK,errmsg='OK')
 
