@@ -135,16 +135,16 @@ class News(BaseModel, db.Model):
 
     def to_dict(self):
         resp_dict = {
-            "id": self.id,
-            "title": self.title,
-            "source": self.source,
-            "digest": self.digest,
+            "id": self.id,  # id
+            "title": self.title,  # 标题
+            "source": self.source, # 来源
+            "digest": self.digest, # 摘要
             "create_time": self.create_time.strftime("%Y-%m-%d %H:%M:%S"),
-            "content": self.content,
-            "comments_count": self.comments.count(),
-            "clicks": self.clicks,
-            "category": self.category.to_dict(),
-            "index_image_url": self.index_image_url,
+            "content": self.content,  # 内容
+            "comments_count": self.comments.count(), # 评论数
+            "clicks": self.clicks,    #浏览量
+            "category": self.category.to_dict(),  #分类
+            "index_image_url": self.index_image_url,  # 图片地址
             "author": self.user.to_dict() if self.user else None
         }
         return resp_dict
