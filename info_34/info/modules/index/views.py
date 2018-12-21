@@ -5,7 +5,7 @@ from flask import session
 
 from info.models import User, News, Category
 from info.modules.index import index_blue
-from response_code import RET
+from info.response_code import RET
 
 
 @index_blue.route('/')
@@ -55,7 +55,7 @@ def index():
 
 @index_blue.route('/favicon.ico')
 def favicon():
-    return current_app.send_static_file('news/favicon.ico')
+    return current_app.send_static_file('news_blue/favicon.ico')
 
 @index_blue.route('/news_list')
 def get_index_list():

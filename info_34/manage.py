@@ -11,6 +11,8 @@ from info.utlis.common import do_index_kind
 app = create_app()
 
 app.add_template_filter(do_index_kind, "index_kind")
+from info.modules.news_blue import news_blue_list
+app.register_blueprint(news_blue_list)
 
 #使用 Manager管理类来管理 app
 manager=Manager(app)

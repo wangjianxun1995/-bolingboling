@@ -76,6 +76,7 @@ def create_app(config_name='development'):
     return app
 
 
+
 def setup_log(config_name):
     """配置日志"""
 
