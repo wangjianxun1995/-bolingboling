@@ -95,7 +95,7 @@
             </div>
             <ul class="rank_list">
                 {% for item in data.clisks_news %}
-                    <li><span class="first">{{ loop.index }}</span><a href="#">{{ item.title }}</a></li>
+                    <li><span class="{{ loop.index0 | index_kind }}">{{ loop.index }}</span><a href="#">{{ item.title }}</a></li>
                 {% endfor %}
 
 
