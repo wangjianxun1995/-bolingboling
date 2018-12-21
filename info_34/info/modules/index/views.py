@@ -1,25 +1,30 @@
 from flask import current_app, jsonify
+from flask import g
 from flask import render_template
 from flask import request
 from flask import session
 
+from common import login_user_data
 from info.models import User, News, Category
 from info.modules.index import index_blue
 from info.response_code import RET
 
 
 @index_blue.route('/')
+@login_user_data
 def index():
-    # 因为登录信息保存在session中，所以获取user_id
+    # # 因为登录信息保存在session中，所以获取user_id
+    #
+    # user_id  =session.get('user_id')
+    # user = None
+    # if user_id:
+    #     try:
+    #         # 如果 有值说明用户已经登录
+    #         user = User.query.get(user_id)
+    #     except Exception as e:
+    #         current_app.logger.error(e)
+    user=g.user
 
-    user_id  =session.get('user_id')
-    user = None
-    if user_id:
-        try:
-            # 如果 有值说明用户已经登录
-            user = User.query.get(user_id)
-        except Exception as e:
-            current_app.logger.error(e)
         #######################################点击率排行##########################################
 
     # 根据点击率 进行指定数量降序 排列
