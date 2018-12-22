@@ -7,7 +7,7 @@ from flask import session
 
 from common import login_user_data
 from info import db
-from info.models import  News, Comment
+from info.models import  News, Comment, CommentLike
 from info.modules.news_blue import news_blue_list
 from info.response_code import RET
 from info.models import  User
@@ -60,14 +60,33 @@ def detail(news_id):
         comments = Comment.query.filter(Comment.news_id == news_id).order_by(Comment.create_time.desc()).all()
     except Exception as e:
         current_app.logger.error(e)
+    # 在这里查询 Comment_Like 中的当前登录用户的id 信息
+    try:
+        comment_like_list = CommentLike.query.filter(CommentLike.user_id==user.id).all()
+    except Exception as e:
+        current_app.logger.error(e)
+    # 将对象转换为列表
+    user_comment_like_ids = []
+    for i in comment_like_list:
+        user_comment_like_ids.append(i.comment_id)
+
     comments_list= []
     for item in comments:
-        comments_list.append(item.to_dict())
+        comment_dict = item.to_dict()
+        # 我们的自己判断 当前用户是否对这个评论 点赞
+        comment_dict['is_like'] = False
+        if user and item.id in user_comment_like_ids:
+            comment_dict['is_like'] = True
+        comments_list.append(comment_dict)
+
     data = {
+
         'user_info': user.to_dict() if user else None,
         'clisks_news': clicks_news,
         'news':news.to_dict(),
-        'comments':comments_list
+        'comments':comments_list,
+
+
     }
     # return '%s'% news_id
     return render_template('news/detail.html',data=data)
@@ -176,4 +195,72 @@ def news_comment():
         db.session.rollback()
     # 6. 返回响应 同时把 新增的数据传递给前端
     return jsonify(errno=RET.OK, errmsg='OK',data ={'comment':comment.to_dict()})
+'''
+点赞的需求：
+    需要将 用户信息， 评论的id 传递给后端 点赞的状态 传递给后端
+
+
+1. 点赞功能必须要登陆
+2. 接收参数 ，并且对参数进行判断
+3. comment_id 进行查询，并且判断 必须有评论
+4. 数据入库
+5. 返回相应
+
+'''
+
+@news_blue_list.route('/comment_like',methods=['post'])
+@login_user_data
+def comment_like():
+    # 1.点赞功能必须要登陆
+    user = g.user
+    if user is None:
+        return jsonify(errno=RET.SESSIONERR, errmsg='您未登录')
+    # 2.接收参数 ，并且对参数进行判断
+    comment_id = request.json.get('comment_id')
+    action = request.json.get('action')
+    if not all([comment_id,action]):
+        return jsonify(errno=RET.PARAMERR, errmsg='参数不正确')
+    # 3. comment_id 进行查询，并且判断 必须有评论
+    try:
+        comment = Comment.query.get(comment_id)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.DBERR, errmsg='未查询此评论')
+    # 4. 数据入库
+    if action == 'add':
+        comment_like = CommentLike.query.filter(CommentLike.comment_id==comment_id
+                                                ,CommentLike.user_id == user.id).first()
+        if not comment_like:
+            cl = CommentLike()
+            cl.comment_id=comment_id
+            cl.user_id = user.id
+
+            # 更新 点赞 的数量
+            comment.like_count += 1
+
+            try:
+                db.session.add(cl)
+                db.session.commit()
+            except Exception as e:
+                current_app.logger.error(e)
+                db.session.rollback()
+    else:
+        #取消 点赞
+        # 先查询 有没有点赞
+        comment_like = CommentLike.query.filter(CommentLike.comment_id == comment_id
+                                                , CommentLike.user_id == user.id).first()
+        # 如果点赞了 才取消
+        # 把 点赞数量 -1
+        if comment_like:
+            comment.like_count -= 1
+            try:
+                db.session.delete(comment_like)
+                db.session.commit()
+            except Exception as e:
+                current_app.logger.error(e)
+                db.session.rollback()
+
+
+    # 5. 返回相应
+    return jsonify(errno=RET.OK, errmsg='Ok')
 
