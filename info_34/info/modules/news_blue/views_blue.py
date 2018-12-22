@@ -55,11 +55,19 @@ def detail(news_id):
     if user:
         if news in user.collection_news:
             is_collected = True
-
+    #######################################以下为当前新闻的所有评论##############################
+    try:
+        comments = Comment.query.filter(Comment.news_id == news_id).order_by(Comment.create_time.desc()).all()
+    except Exception as e:
+        current_app.logger.error(e)
+    comments_list= []
+    for item in comments:
+        comments_list.append(item.to_dict())
     data = {
         'user_info': user.to_dict() if user else None,
         'clisks_news': clicks_news,
-        'news':news.to_dict()
+        'news':news.to_dict(),
+        'comments':comments_list
     }
     # return '%s'% news_id
     return render_template('news/detail.html',data=data)
@@ -138,7 +146,7 @@ def news_comment():
     # 2. 要接收参数， news_id, content
     news_id = request.json.get('news_id')
     content = request.json.get('comment')
-    comments_id = request.json.get('parent_id')
+    parent_comment_id = request.json.get('parent_id')
     # 3. 2个参数必须有，
     if not all([news_id,content]):
         return jsonify(errno=RET.PARAMERR, errmsg='参数不全')
@@ -155,6 +163,11 @@ def news_comment():
     comment.user_id = user.id
     comment.news_id = news.id
     comment.content = content
+    # 根据用户传递过来的 评论的父ID 来判断用户是否跟帖
+    # 如果parent_comment_id有值则是跟帖
+    if parent_comment_id:
+        comment.parent_id = parent_comment_id
+
     try:
         db.session.add(comment)
         db.session.commit()
