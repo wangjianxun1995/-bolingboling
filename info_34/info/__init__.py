@@ -29,6 +29,8 @@ def create_app(config_name='development'):
 
     #加载配置文件
     app.config.from_object(config[config_name])
+    from info.modules.perfile import profile_blu
+    app.register_blueprint(profile_blu)
     ############################定义全局404#####################################
     @app.errorhandler(404)
     def page_not_found(e):
