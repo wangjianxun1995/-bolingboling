@@ -2,6 +2,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 from flask import Flask
+from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from flask_session import Session
@@ -28,6 +29,11 @@ def create_app(config_name='development'):
 
     #加载配置文件
     app.config.from_object(config[config_name])
+    ############################定义全局404#####################################
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('news/404.html')
+
 
     #创建SQLAlchemy 实例对象
     # db=SQLAlchemy(app)

@@ -15,8 +15,11 @@ def do_index_kind(li):
     else:
         return ""
 
-
+import functools
 def login_user_data(f):
+    # 作用就是 保留原有的函数的参数设置，
+    # 不会被wrapper修改
+    @functools.wraps(f)
     def wrapper(*args,**kwargs):
         user_id = session.get('user_id')
         user = None
