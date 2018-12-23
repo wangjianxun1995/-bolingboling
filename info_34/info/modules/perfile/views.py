@@ -10,3 +10,9 @@ def user_info():
     user = g.user
     # 返回 user的首页展示 以及登录信息的展示 和html的抽取
     return render_template('news/user.html',data = {'user_info':user.to_dict() if user else None})
+
+@profile_blu.route('/base_info')
+@login_user_data
+def user_base_info():
+    user=g.user
+    return render_template('news/user_base_info.html',data = {'user_info':user.to_dict() if user else None})
