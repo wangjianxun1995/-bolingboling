@@ -1,3 +1,4 @@
+
 from flask import current_app
 from flask import g, jsonify
 from flask import render_template
@@ -7,6 +8,7 @@ from common import login_user_data
 from image_storage import storage
 from info import constants
 from info import db
+from info.models import Category, News
 from info.modules.perfile import  profile_blu
 from info.response_code import RET
 
@@ -164,5 +166,139 @@ def pass_info():
 @profile_blu.route('/collection')
 @login_user_data
 def user_collection():
+    user = g.user
+    if user is None:
+        return jsonify(errno=RET.SESSIONERR, errmsg='用户未登录')
 
-    return render_template('news/user_collection.html')
+    try:
+        p = request.args.get('p', 1)
+        p=int(p)
+    except Exception as e:
+        current_app.logger.error(e)
+        p = 1
+    # 查询 数据
+    try:
+        paginage= user.collection_news.paginate(page=p, per_page=2)
+        items = paginage.items
+        current_page = paginage.page
+        total_page = paginage.pages
+
+    except Exception as e:
+        return jsonify(errno=RET.DBERR, errmsg='数据获取失败')
+
+    collections = []
+    for item in items:
+        collections.append(item.to_basic_dict())
+
+    return render_template('news/user_collection.html',
+                           collections=collections,
+                           current_page=current_page,
+                           total_page=total_page)
+
+##############################################以下是我的发布新闻#######################################
+@profile_blu.route('/news_release',methods = ['POST','GET'])
+@login_user_data
+def news_release():
+    user = g.user
+    if user is None:
+        return jsonify(errno=RET.SESSIONERR, errmsg='用户未登录')
+
+    # 如果请求是get就返回 user_news_release.html
+    if request.method == 'GET':
+
+        #  获取分类信息
+        try:
+            categories = Category.query.all()
+        except Exception as e:
+            current_app.logger.error(e)
+        categories_list=[]
+        for items in categories:
+            categories_list.append(items.to_dict())
+        categories_list.pop(0)
+
+        return render_template('news/user_news_release.html',categories=categories_list)
+    """
+        POST 获取发布是新闻数据
+        # 1.接收参数
+        # 2. 参数进行校验 ,必须都传递进来
+        # 3. 图片的单独处理, 我们保存的是 图片的 url 我们先把图片上传到七牛云中
+        # 4. 新增新闻
+        # 5. 保存到数据库
+        # 6. 返回
+
+    """
+  #########################################################
+    # 1.接收参数
+
+    title =request.form.get('title') # 新闻标题 #
+    source = "个人发布" # 来源
+    digest= request.form.get('digest') #新闻摘要 #
+    content= request.form.get('content') #内容
+    index_image= request.files.get('index_image') # 图片 #
+    category_id= request.form.get('category_id') # 种类ｉｄ #
+    # 2. 参数进行校验 ,必须都传递进来
+    if not all([title,source,digest,content,index_image,category_id]):
+        return jsonify(errno=RET.PARAMERR, errmsg='参数不全')
+    # 3. 图片的单独处理, 我们保存的是 图片的 url 我们先把图片上传到七牛云中
+    try:
+        index_image = index_image.read()
+        path = storage(index_image)
+    except Exception as e:
+        current_app.logger.error(e)
+        return jsonify(errno=RET.THIRDERR, errmsg='上传图片失败')
+    # 4. 新增新闻
+    news=News()
+    news.title=title
+    news.source='个人'
+    news.category_id=category_id
+    news.digest=digest
+    news.content=content
+    news.index_image=index_image
+    news.index_image_url = constants.QINIU_DOMIN_PREFIX + path
+    news.status=1  # 0代表审核通过，1代表审核中，-1代表审核不通过
+    # 5. 保存到数据库
+    try:
+        db.session.add(news)
+        db.session.commit()
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+    # 6. 返回
+    return jsonify(errno=RET.OK, errmsg='发布成功')
+
+##################################以下是关注列表####################################################
+@profile_blu.route('/user_follow')
+@login_user_data
+def follow_list():
+    user = g.user
+    if user is None:
+        return jsonify(errno=RET.SESSIONERR, errmsg='未登录')
+    """
+
+        1. 获取参数,进行校验
+        2. 进行分页
+        3. 返回数据
+
+        """
+    try:
+        p = request.args.get('p',1)
+    except Exception as e:
+        p =1
+    try:
+        paginate = user.followers.paginate(page=p,per_page=2)
+        items = paginate.items  # 获取所有页数的数据
+        current_page = paginate.page  # 当前的页数
+        total_page = paginate.pages  # 总页数
+    except Exception as e:
+        return jsonify(errno=RET.DBERR, errmsg='没有数据')
+    follows = []
+    for item in items:
+        follows.append(item.to_dict())
+    data = {
+        'current_page':current_page,
+        'total_page':total_page,
+        'users':follows
+    }
+    return render_template('news/user_follow.html',data=data)
+
+
