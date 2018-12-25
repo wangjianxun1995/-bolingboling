@@ -4,8 +4,8 @@ from flask import g, jsonify
 from flask import render_template
 from flask import request
 from flask import session
-from common import login_user_data
-from image_storage import storage
+from info.utlis.common import login_user_data
+from info.utlis.image_storage import storage
 from info import constants
 from info import db
 from info.models import Category, News

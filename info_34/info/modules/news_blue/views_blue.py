@@ -5,7 +5,7 @@ from flask import render_template
 from flask import request
 from flask import session
 
-from common import login_user_data
+from info.utlis.common import login_user_data
 from info import db
 from info.models import  News, Comment, CommentLike
 from info.modules.news_blue import news_blue_list

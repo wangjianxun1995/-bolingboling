@@ -4,7 +4,7 @@ from flask import render_template
 from flask import request
 from flask import session
 
-from common import login_user_data
+from info.utlis.common import login_user_data
 from info.models import User, News, Category
 from info.modules.index import index_blue
 from info.response_code import RET
