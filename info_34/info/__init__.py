@@ -80,6 +80,8 @@ def create_app(config_name='development'):
 
     from info.modules.passport import passport_blue
     app.register_blueprint(passport_blue)
+    from info.modules.admin import admin_blu
+    app.register_blueprint(admin_blu)
     #一定要注意：返回
     return app
 
