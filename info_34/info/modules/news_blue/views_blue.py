@@ -272,4 +272,41 @@ def comment_like():
 
     # 5. 返回相应
     return jsonify(errno=RET.OK, errmsg='Ok')
-
+#######################################用户关注列表#########################################################
+@news_blue_list.route('/followed_user',methods=['POST'])
+@login_user_data
+def user_follow():
+    user = g.user
+    if user is None:
+        return jsonify(errno=RET.SESSIONERR, errmsg='用户未登录')
+    # 接受前端提交的数据
+    user_id = request.json.get('user_id')
+    action = request.json.get('action')
+    #  这两个数据必须都有
+    if not all([user_id,action]):
+        return jsonify(errno=RET.PARAMERR, errmsg='数据不全')
+    # action必须都是 follow unfollow
+    if action not in ['follow','unfollow']:
+        return jsonify(errno=RET.PARAMERR, errmsg='数据错误')
+    # 查询关注的user
+    try:
+        news_user = User.query.get(user_id)
+    except Exception as e:
+        return jsonify(errno=RET.DBERR, errmsg='数据查询失败')
+    # 必须根据业务逻辑完成功能
+    if action =='follow':
+        # 关注
+        if news_user not in user.followers:
+            user.followers.append(news_user)
+    else:
+        #取消关注
+        if news_user in user.followers:
+            user.followers.remove(news_user)
+    #提交
+    try:
+        db.session.commit()
+    except Exception as e:
+        current_app.logger.error(e)
+        db.session.rollback()
+    # 返回相应
+    return jsonify(errno=RET.OK, errmsg='添加成功')
