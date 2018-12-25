@@ -51,24 +51,33 @@ def detail(news_id):
         return jsonify(errno=RET.NODATA, errmsg='没有这个新闻！')
 
     #######################################判断用户是否收藏按钮##########################################
-    is_collected =False
+    is_collected =False   # false 是都没有收藏 true  是收藏
+    is_followed = False   # false是没有关注 true 是关注
     if user:
         if news in user.collection_news:
             is_collected = True
+        try:
+            news_user = User.query.get(news.user_id)
+        except Exception as e:
+            current_app.logger.error(e)
+        if news_user in user.followers:
+            is_followed = True
     #######################################以下为当前新闻的所有评论##############################
+
     try:
         comments = Comment.query.filter(Comment.news_id == news_id).order_by(Comment.create_time.desc()).all()
     except Exception as e:
         current_app.logger.error(e)
     # 在这里查询 Comment_Like 中的当前登录用户的id 信息
-    try:
-        comment_like_list = CommentLike.query.filter(CommentLike.user_id==user.id).all()
-    except Exception as e:
-        current_app.logger.error(e)
-    # 将对象转换为列表
-    user_comment_like_ids = []
-    for i in comment_like_list:
-        user_comment_like_ids.append(i.comment_id)
+    if user:
+        try:
+            comment_like_list = CommentLike.query.filter(CommentLike.user_id==user.id).all()
+        except Exception as e:
+            current_app.logger.error(e)
+        # 将对象转换为列表
+        user_comment_like_ids = []
+        for i in comment_like_list:
+            user_comment_like_ids.append(i.comment_id)
 
     comments_list= []
     for item in comments:
